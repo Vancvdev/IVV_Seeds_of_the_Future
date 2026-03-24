@@ -1,11 +1,21 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Paris - Experiência Imersiva</title>
     <link rel="stylesheet" href="Paris.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <!-- MENU E BOTÃO DE TEMA (NOVO) -->
+    <nav id="main-menu-paris">
+        <div class="menu-wrapper">
+            <span class="menu-logo">A beleza está nos olhos de quem vê</span>
+            <button id="theme-toggle-btn" onclick="toggleTheme()">MUDAR TEMA</button>
+        </div>
+    </nav>
 
     <!-- TITLE CARD (INTRODUÇÃO) - MANTIDO -->
     <div id="title-card">
@@ -74,3 +84,7 @@
 
     </div>
 </section>
+</body>
+
+<script src="./Paris.js"></script>
+</html>
