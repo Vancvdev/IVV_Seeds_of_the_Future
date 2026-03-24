@@ -1,21 +1,56 @@
-@import url('https://fonts.googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Comic+Relief:wght@400;700&display=swap');
+
+/* --- CONFIGURAÇÃO DE TEMAS (INJETADO) --- */
+:root {
+    --bg-paris: radial-gradient(circle, rgba(20, 20, 20, 0.5) 0%, rgba(5, 5, 5, 1) 70%);
+    --text-color: white;
+    --ui-border: rgba(255, 255, 255, 0.952);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+body.light-mode {
+    --bg-paris: radial-gradient(circle, rgba(240, 240, 240, 0.5) 0%, rgba(220, 220, 220, 1) 70%);
+    --text-color: #1a1a1a;
+    --ui-border: rgba(0, 0, 0, 0.8);
+    --glass-bg: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(0, 0, 0, 0.15);
+}
+
+/* --- ESTILO DO NOVO MENU --- */
+#main-menu-paris {
+    position: fixed; top: 0; width: 100%; z-index: 2000;
+    padding: 25px 50px; font-family: 'Bodoni Moda', serif;
+}
+.menu-wrapper {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;
+}
+.menu-logo { font-weight: 900; letter-spacing: 5px; color: var(--text-color); text-transform: uppercase; }
+#theme-toggle-btn {
+    background: var(--text-color); color: var(--bg-paris); 
+    border: none; padding: 8px 20px; cursor: pointer;
+    font-family: 'Bodoni Moda', serif; font-weight: 900; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; transition: 0.3s;
+}
+
+/* --- SEU CÓDIGO ORIGINAL ABAIXO --- */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body { 
-    background: 
-        radial-gradient(circle, rgba(20, 20, 20, 0.5)  0%, rgba(5, 5, 5, 1) 70%),
-        url('https://www.transparenttextures.com'); 
+body {
+    background: var(--bg-paris), url('https://www.transparenttextures.com'); 
     background-attachment: fixed;
     overflow-x: hidden; 
 }
+
 
 /* --- TITLE CARD (INTRO) --- */
 #title-card {
     position: fixed; inset: 0; background: white; 
     display: flex; justify-content: center; align-items: center;
     z-index: 1000; overflow: hidden;
-    animation: sumir 0.7s forwards 4.5s;
+    animation: sumir 1.1s forwards 4.5s;
 }
 
 #title-card::after {
@@ -27,15 +62,16 @@ body {
 #splash-img { 
     position: absolute; width: 110%; height: 110%; object-fit: cover; 
     filter: blur(0px) brightness(1.1); transform: scale(1.02);
-    animation: cameraShakeSuave 0.6s ease-out, desfocarFundoProfundo 2.5s forwards 1.2s, balancoCinematografico 12s infinite ease-in-out 0.6s;
+    animation: cameraShakeSuave 0.6s ease-out, desfocarFundoProfundo 2.0s forwards 1.0s, balancoCinematografico 12s infinite ease-in-out 0.6s;
 }
 
 #splash-text { 
     position: relative; color: #969494; border: 1px solid rgb(207, 203, 203); 
-    font-size: 100px; z-index: 1001; font-family: 'Bellefair', serif;
+    font-size: 100px; z-index: 1001; font-family: 'Bodoni Moda', serif;
     text-transform: uppercase; letter-spacing: 15px; opacity: 0; filter: blur(25px);
     animation: focoEFading 4.5s ease-in-out forwards 0.5s;
 }
+
 
 /* --- ELEMENTOS TÉCNICOS --- */
 .glass-overlay {
@@ -61,93 +97,84 @@ body {
 .camera-ui {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     width: 500px; height: 629px; z-index: 10; pointer-events: none;
-    border: 1px solid rgba(255, 255, 255, 0.952);
+    border: 1px solid var(--ui-border); /* Troca de cor dinâmica */
     display: flex; flex-direction: column; justify-content: space-between;
-    padding: 20px; font-family: 'Courier New', monospace; color: white;
+    padding: 20px; font-family: 'Bodoni Moda', monospace; color: var(--text-color); /* Troca de cor dinâmica */
 }
 
 .top-ui, .bottom-ui { display: flex; justify-content: space-between; width: 100%; }
 
 .side-info {
     position: absolute; top: 50%; transform: translateY(-50%);
-    width: 450px; font-size: 20px; line-height: 2; color: white;
-    text-transform: uppercase; font-family: "Raleway", serif; letter-spacing: 2px;
+    width: 450px; font-size: 20px; line-height: 2; color: var(--text-color); /* Troca de cor dinâmica */
+    text-transform: uppercase; font-family: "Bodoni Moda", serif; letter-spacing: 2px;
 }
 .left { left: -480px; text-align: right; }
 .right { right: -480px; text-align: left; }
 
 .content {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -240px); 
-    color: white; background: rgba(255, 255, 255, 0.1);
-    padding: 10px 50px; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2);
-    z-index: 100; text-align: center; font-family: "Raleway", serif; text-transform: uppercase;
+    color: var(--text-color); background: var(--glass-bg); /* Troca de cor dinâmica */
+    padding: 10px 50px; backdrop-filter: blur(15px); border: 1px solid var(--glass-border); /* Troca de cor dinâmica */
+    z-index: 100; text-align: center; font-family: "Bodoni Moda", serif; text-transform: uppercase;
 }
 
-/* --- SEÇÃO 2: ARCO DO TRIUNFO (MOLDURAS NAS IMAGENS) --- */
-
 /* --- SEÇÃO 2: ARCO DO TRIUNFO (CORREÇÕES) --- */
-/* 1. Libera a seção para crescer verticalmente e não sobrepor a Torre Eiffel */
 #arco-do-triunfo.monumento { 
     height: auto !important; 
     min-height: 100vh; 
     display: flex;
     flex-direction: column; 
     align-items: center;
-    padding: 150px 0; /* Espaço para separar as seções no scroll */
+    padding: 150px 0; 
     position: relative;
 }
 
-/* 2. Container principal das fotos e texto */
 .camera-ui.layout-revista {
     position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px; /* Espaçamento entre Foto 1 -> Texto -> Foto 2 */
+    gap: 60px; 
     transform: none !important;
     top: auto !important;
     left: auto !important;
     border: none !important;
 }
 
-/* 3. Molduras das Fotos (25% maiores e esticadas) */
 .frame-foto {
-    /* DEFINIÇÃO MANUAL DE TAMANHO (GIGANTE) */
-    width: 940px !important;     /* Largura máxima desejada */
-    height: 700px !important;    /* Altura robusta (MUITO maior que 1px) */
-    
-    /* TRAVA DE SEGURANÇA: Ocupa até 95% da largura da tela sem vazar */
+    width: 940px !important;     
+    height: 700px !important;    
     max-width: 90vw !important; 
-    max-height: 60vh !important; /* Impede que a foto seja maior que a tela do usuário */
+    max-height: 60vh !important; 
 
     position: relative;
-    display: block;              /* Garante que o elemento se comporte como bloco */
-    margin: 20px auto;           /* Espaço de 40px entre os elementos para não grudarem */
+    display: block;              
+    margin: 20px auto;           
     
-    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid var(--ui-border) !important; /* Troca de cor dinâmica */
     overflow: hidden;
     background: #000;
-    z-index: 1;                  /* Fica abaixo do título no scroll */
-    flex-shrink: 0;              /* IMPEDE que o navegador esmague a imagem para 1px */
+    z-index: 1;                  
+    flex-shrink: 0;              
 }
 
 .frame-foto img {
     width: 100%;
     height: 100%;
-    object-fit: cover;           /* Preenche toda a moldura sem distorcer a foto */
+    object-fit: cover;           
     display: block;
 }
 
 
-/* 4. Textos INTERNOS da foto (REC, 4K, Autor) - Reposicionados */
 .ui-interna {
     position: absolute;
     width: 100%;
     padding: 15px;
-    font-family: 'Courier New', monospace;
+    font-family: 'Bodoni Moda', monospace;
     font-size: 12px;
-    color: white;
+    color: white; /* Mantido fixo para simular interface de gravação */
     display: flex;
     justify-content: space-between;
     z-index: 5;
@@ -157,9 +184,6 @@ body {
 .ui-interna.top { top: 0; }
 .ui-interna.bottom { bottom: 0; }
 
-/* 5. Bloco de Texto (TOTALMENTE FORA E INDEPENDENTE) */
-
-
 .content-revista {
     position: relative;
     width: 100%;
@@ -167,41 +191,38 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 7px 0; /* Espaço para não encostar nas fotos */
+    margin: 7px 0; 
 }
 
 .content-revista h1 {
     position: sticky;           
-    top: 30px;                  /* Onde ele "trava" no topo ao scrollar */
-    z-index: 200;               /* VALOR ALTO: Garante que passe POR CIMA das fotos */
+    top: 80px; /* Ajustado para não colidir com o menu fixo */
+    z-index: 200;               
     
-    font-family: "Raleway", serif;
+    font-family: "Bodoni Moda", serif;
     text-transform: uppercase;
     letter-spacing: 15px;
     font-size: 20px;
-    color: white;
-    background: rgba(0, 0, 0, 0.4); /* Fundo sutil para leitura sobre a foto */
-    padding: 15px 50px;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color); background: var(--glass-bg); /* Troca de cor dinâmica */
+    padding: 10px 50px; backdrop-filter: blur(15px); border: 1px solid var(--glass-border); /* Troca de cor dinâmica */
     
     text-align: center;
-    width: fit-content;         /* Ajusta ao tamanho do texto */
-    margin: 0 auto 50px auto;   /* Centraliza e dá espaço para o texto abaixo */
+    width: fit-content;         
+    margin: 0 auto 50px auto;   
 }
 .content-revista p {
     position: relative;
     width: 90%; 
-    max-width: 700px;           /* Texto elegante e centralizado */
+    max-width: 700px;           
     margin: 5px auto; 
-    font-family: "Raleway", serif;
+    font-family: "Bodoni Moda", serif;
     font-size: 13px;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-color); /* Troca de cor dinâmica */
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: justify; 
-    z-index: 10;                /* Abaixo do título, acima do fundo */
+    z-index: 10;                
 }
 
 /* --- ANIMAÇÕES --- */
@@ -224,3 +245,4 @@ body {
     to { filter: blur(15px) brightness(1.3) contrast(1.1); transform: scale(1.15); }
 }
 @keyframes sumir { to { opacity: 0; visibility: hidden; } }
+
