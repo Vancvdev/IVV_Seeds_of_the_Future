@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    background: 
+        radial-gradient(circle, rgba(20, 20, 20, 0.5)  0%, rgba(5, 5, 5, 1) 70%),
+        url('https://www.transparenttextures.com'); 
+    background-attachment: fixed;
+    overflow-x: hidden; 
+}
+
+/* --- TITLE CARD (INTRO) --- */
+#title-card {
+    position: fixed; inset: 0; background: white; 
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000; overflow: hidden;
+    animation: sumir 0.7s forwards 4.5s;
+}
+
+#title-card::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.3) 100%);
+    pointer-events: none; z-index: 1002;
+}
+
+#splash-img { 
+    position: absolute; width: 110%; height: 110%; object-fit: cover; 
+    filter: blur(0px) brightness(1.1); transform: scale(1.02);
+    animation: cameraShakeSuave 0.6s ease-out, desfocarFundoProfundo 2.5s forwards 1.2s, balancoCinematografico 12s infinite ease-in-out 0.6s;
+}
+
+#splash-text { 
+    position: relative; color: #969494; border: 1px solid rgb(207, 203, 203); 
+    font-size: 100px; z-index: 1001; font-family: 'Bellefair', serif;
+    text-transform: uppercase; letter-spacing: 15px; opacity: 0; filter: blur(25px);
+    animation: focoEFading 4.5s ease-in-out forwards 0.5s;
+}
+
+/* --- ELEMENTOS TÉCNICOS --- */
+.glass-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.1); backdrop-filter: blur(0.55px);
+    z-index: 1; pointer-events: none;
+}
+
+.monumento { 
+    height: 100vh; display: flex; justify-content: center; align-items: center; 
+    position: relative; z-index: 5;
+}
+
+/* --- SEÇÃO 1: TORRE EIFFEL (MOLDURA CLÁSSICA) --- */
+
+.bg-travado-secao-1 {
+    position: absolute; 
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 500px; height: 629px; object-fit: cover;
+    z-index: -1; filter: contrast(1.1) brightness(0.6) grayscale(0.3);
+}
+
+.camera-ui {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 500px; height: 629px; z-index: 10; pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.952);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 20px; font-family: 'Courier New', monospace; color: white;
+}
+
+.top-ui, .bottom-ui { display: flex; justify-content: space-between; width: 100%; }
+
+.side-info {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 450px; font-size: 20px; line-height: 2; color: white;
+    text-transform: uppercase; font-family: "Raleway", serif; letter-spacing: 2px;
+}
+.left { left: -480px; text-align: right; }
+.right { right: -480px; text-align: left; }
+
+.content {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -240px); 
+    color: white; background: rgba(255, 255, 255, 0.1);
+    padding: 10px 50px; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2);
+    z-index: 100; text-align: center; font-family: "Raleway", serif; text-transform: uppercase;
+}
+
+/* --- SEÇÃO 2: ARCO DO TRIUNFO (MOLDURAS NAS IMAGENS) --- */
+
+/* --- SEÇÃO 2: ARCO DO TRIUNFO (CORREÇÕES) --- */
+/* 1. Libera a seção para crescer verticalmente e não sobrepor a Torre Eiffel */
+#arco-do-triunfo.monumento { 
+    height: auto !important; 
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 150px 0; /* Espaço para separar as seções no scroll */
+    position: relative;
+}
+
+/* 2. Container principal das fotos e texto */
+.camera-ui.layout-revista {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px; /* Espaçamento entre Foto 1 -> Texto -> Foto 2 */
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    border: none !important;
+}
+
+/* 3. Molduras das Fotos (25% maiores e esticadas) */
+.frame-foto {
+    /* DEFINIÇÃO MANUAL DE TAMANHO (GIGANTE) */
+    width: 940px !important;     /* Largura máxima desejada */
+    height: 700px !important;    /* Altura robusta (MUITO maior que 1px) */
+    
+    /* TRAVA DE SEGURANÇA: Ocupa até 95% da largura da tela sem vazar */
+    max-width: 90vw !important; 
+    max-height: 60vh !important; /* Impede que a foto seja maior que a tela do usuário */
+
+    position: relative;
+    display: block;              /* Garante que o elemento se comporte como bloco */
+    margin: 20px auto;           /* Espaço de 40px entre os elementos para não grudarem */
+    
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    overflow: hidden;
+    background: #000;
+    z-index: 1;                  /* Fica abaixo do título no scroll */
+    flex-shrink: 0;              /* IMPEDE que o navegador esmague a imagem para 1px */
+}
+
+.frame-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           /* Preenche toda a moldura sem distorcer a foto */
+    display: block;
+}
+
+
+/* 4. Textos INTERNOS da foto (REC, 4K, Autor) - Reposicionados */
+.ui-interna {
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.ui-interna.top { top: 0; }
+.ui-interna.bottom { bottom: 0; }
+
+/* 5. Bloco de Texto (TOTALMENTE FORA E INDEPENDENTE) */
+
+
+.content-revista {
+    position: relative;
+    width: 100%;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 7px 0; /* Espaço para não encostar nas fotos */
+}
+
+.content-revista h1 {
+    position: sticky;           
+    top: 30px;                  /* Onde ele "trava" no topo ao scrollar */
+    z-index: 200;               /* VALOR ALTO: Garante que passe POR CIMA das fotos */
+    
+    font-family: "Raleway", serif;
+    text-transform: uppercase;
+    letter-spacing: 15px;
+    font-size: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.4); /* Fundo sutil para leitura sobre a foto */
+    padding: 15px 50px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    text-align: center;
+    width: fit-content;         /* Ajusta ao tamanho do texto */
+    margin: 0 auto 50px auto;   /* Centraliza e dá espaço para o texto abaixo */
+}
+.content-revista p {
+    position: relative;
+    width: 90%; 
+    max-width: 700px;           /* Texto elegante e centralizado */
+    margin: 5px auto; 
+    font-family: "Raleway", serif;
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: justify; 
+    z-index: 10;                /* Abaixo do título, acima do fundo */
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes focoEFading {
+    0% { opacity: 0; filter: blur(30px); transform: scale(1.1); }
+    30% { opacity: 1; filter: blur(0px); transform: scale(1); }
+    80% { opacity: 1; filter: blur(0px); transform: scale(1); }
+    100% { opacity: 0; filter: blur(20px); transform: scale(0.95); }
+}
+@keyframes cameraShakeSuave {
+    0% { transform: rotate(0deg) scale(1.02); }
+    25% { transform: rotate(0.2deg) translate(-2px, 2px); }
+    100% { transform: rotate(0deg) scale(1.02); }
+}
+@keyframes balancoCinematografico {
+    0%, 100% { transform: translate(0,0) scale(1.05); }
+    50% { transform: translate(-1.5%, 1%) scale(1.1); }
+}
+@keyframes desfocarFundoProfundo {
+    to { filter: blur(15px) brightness(1.3) contrast(1.1); transform: scale(1.15); }
+}
+@keyframes sumir { to { opacity: 0; visibility: hidden; } }
